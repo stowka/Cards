@@ -1,5 +1,7 @@
 package game;
 
+import gui.Main;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -143,6 +145,7 @@ public class Game {
 		System.out.println("\t" + p2.getName() + ":\t"
 				+ game.getPlayerTwoScore());
 		System.out.println("Game ended...");
+		new Main();
 	}
 
 	/**
