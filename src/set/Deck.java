@@ -5,27 +5,28 @@ import java.util.Collections;
 import java.util.Random;
 
 /**
- * CardSet class - 
+ * Deck class - 
  * @author Antoine De Gieter
+ * @author Béligat François-Xavier
  *
  */
-public class CardSet {
+public class Deck {
 	private ArrayList<Card> cardSet;
-	private static CardSet _instance = null;
+	private static Deck _instance = null;
 	
 	/**
 	 * Singleton constructor
 	 */
-	private CardSet() {
+	private Deck() {
 		cardSet = new ArrayList<Card>();
 	}
 	
 	/**
 	 * @return the single instance of the card set
 	 */
-	public static CardSet getInstance() {
+	public static Deck getInstance() {
 		if (null == _instance)
-			_instance = new CardSet();
+			_instance = new Deck();
 		return _instance;
 	}
 	
@@ -56,7 +57,7 @@ public class CardSet {
 	 */
 	public void add(Card card) {
 		if (!cardSet.contains(card))
-			this.cardSet.add(card);
+			cardSet.add(card);
 		else
 			System.out.println("The card " + card + " is already in the set.");
 	}
