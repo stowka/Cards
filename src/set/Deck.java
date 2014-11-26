@@ -7,22 +7,22 @@ import java.util.Random;
 /**
  * Deck class - 
  * @author Antoine De Gieter
- * @author Béligat François-Xavier
+ * @author B&eacute;ligat Fran&ccedil;ois-Xavier
  *
  */
 public class Deck {
-	private ArrayList<Card> cardSet;
+	private ArrayList<Card> deck;
 	private static Deck _instance = null;
 	
 	/**
 	 * Singleton constructor
 	 */
 	private Deck() {
-		cardSet = new ArrayList<Card>();
+		deck = new ArrayList<Card>();
 	}
 	
 	/**
-	 * @return the single instance of the card set
+	 * @return the single instance of the deck
 	 */
 	public static Deck getInstance() {
 		if (null == _instance)
@@ -36,7 +36,7 @@ public class Deck {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		for(Card c : cardSet) {
+		for(Card c : deck) {
 			sb.append(c);
 			sb.append("\n");
 		}
@@ -48,22 +48,36 @@ public class Deck {
 	 */
 	public void shuffle() {
 		long seed = System.nanoTime();
-		Collections.shuffle(cardSet, new Random(seed));
+		Collections.shuffle(deck, new Random(seed));
 	}
 	
 	/**
-	 * Adds a card to the set (does not allow duplicates)
+	 * Adds a card to the deck (does not allow duplicates)
 	 * @param card
 	 */
 	public void add(Card card) {
-		if (!cardSet.contains(card))
-			cardSet.add(card);
+		if (!deck.contains(card))
+			deck.add(card);
 		else
 			System.out.println("The card " + card + " is already in the set.");
 	}
 	
 	/**
-	 * Fills the card set with all possible cards
+	 * Picks a card from the deck
+	 */
+	public Card pick() {
+		return deck.remove(0);
+	}
+	
+	/**
+	 * @return the number of cards in the deck
+	 */
+	public int size() {
+		return deck.size();
+	}
+	
+	/**
+	 * Fills the deck with all possible cards
 	 */
 	public void fill() {
 		for(Color c : Color.values())

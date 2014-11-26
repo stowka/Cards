@@ -10,9 +10,14 @@ import set.Deck;
 public class Game {
 	public static void main(String[] argv) {
 		System.out.println("Game started...\n");
-		Deck.getInstance().fill();
-		Deck.getInstance().shuffle();
-		System.out.println(Deck.getInstance());
+		Deck deck = Deck.getInstance();
+		
+		
+		deck.fill();
+		deck.shuffle();
+		
+		
+		
 		System.out.println("Game ended...");
 	}
 }
