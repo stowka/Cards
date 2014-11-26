@@ -18,6 +18,7 @@ public class Game {
 		deck.fill();
 		deck.shuffle();
 		
+		// DISTRIBUTION
 		while (deck.size() > 0) {
 			p1.receive(deck.pick());
 			p2.receive(deck.pick());
@@ -25,6 +26,9 @@ public class Game {
 		
 		System.out.println(p1);
 		System.out.println(p2);
+		
+		System.out.println(p1.start());
+		System.out.println(p1);
 		
 		System.out.println("Game ended...");
 	}

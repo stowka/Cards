@@ -1,5 +1,7 @@
 package game;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.TreeSet;
 
@@ -80,7 +82,42 @@ public class Player {
 		return count;
 	}
 	
-	public Card play() {
+	/**
+	 * Finds the best cards of the player's hand
+	 * @return
+	 */
+	private Card findMax() {
+		// select best cards
+		ArrayList<Card> bestCards = new ArrayList<Card>();
+		for(Color color : hand.keySet()) {
+			for(Card card : hand.get(color)) {
+				if (bestCards.isEmpty())
+					bestCards.add(card);
+				else {
+					if (card.getValue() == bestCards.get(0).getValue())
+						bestCards.add(card);
+					else if (card.getValue() > bestCards.get(0).getValue()) {
+						bestCards.removeAll(bestCards);
+						bestCards.add(card);
+					}
+				}
+			}
+		}
+		Collections.shuffle(bestCards);
+		return bestCards.get(0);
+	}
+	
+	/**
+	 * Removes the best card from the player's hand (first round)
+	 * @return one of the shuffled best cards 
+	 */
+	public Card start() {
+		Card best = findMax();
+		hand.get(best.getColor()).remove(best);
+		return best;
+	}
+	
+	public Card reply() {
 		// TODO
 		return null;
 	}
