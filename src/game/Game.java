@@ -1,5 +1,6 @@
 package game;
 
+import set.Card;
 import set.Deck;
 
 /**
@@ -27,8 +28,13 @@ public class Game {
 		System.out.println(p1);
 		System.out.println(p2);
 		
-		System.out.println(p1.start());
+		Card card = p1.start();
+		System.out.println(card);
+		card = p2.reply(card);
+		System.out.println(card);
+		
 		System.out.println(p1);
+		System.out.println(p2);
 		
 		System.out.println("Game ended...");
 	}

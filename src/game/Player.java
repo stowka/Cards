@@ -11,13 +11,13 @@ import set.Color;
 /**
  * 
  * @author Antoine De Gieter
- *
+ * 
  */
 public class Player {
 	private long id;
 	private String name;
 	private HashMap<Color, TreeSet<Card>> hand;
-	
+
 	/**
 	 * @param _name
 	 */
@@ -48,14 +48,14 @@ public class Player {
 		}
 		return sb.toString();
 	}
-	
+
 	/**
 	 * @return the player name
 	 */
 	public String getName() {
 		return name;
 	}
-	
+
 	/**
 	 * @return the id
 	 */
@@ -65,13 +65,15 @@ public class Player {
 
 	/**
 	 * Add a card to the player's hand
-	 * @param card the card
+	 * 
+	 * @param card
+	 *            the card
 	 */
 	public void receive(Card card) {
 		if (!hand.get(card.getColor()).contains(card))
 			hand.get(card.getColor()).add(card);
 	}
-	
+
 	/**
 	 * @return the number of cards in the player's hand
 	 */
@@ -81,16 +83,17 @@ public class Player {
 			count += hand.get(color).size();
 		return count;
 	}
-	
+
 	/**
 	 * Finds the best cards of the player's hand
+	 * 
 	 * @return
 	 */
 	private Card findMax() {
 		// select best cards
 		ArrayList<Card> bestCards = new ArrayList<Card>();
-		for(Color color : hand.keySet()) {
-			for(Card card : hand.get(color)) {
+		for (Color color : hand.keySet()) {
+			for (Card card : hand.get(color)) {
 				if (bestCards.isEmpty())
 					bestCards.add(card);
 				else {
@@ -106,21 +109,57 @@ public class Player {
 		Collections.shuffle(bestCards);
 		return bestCards.get(0);
 	}
-	
+
+	/**
+	 * Finds the best cards of the player's hand
+	 * 
+	 * @return
+	 */
+	private Card findMin() {
+		// select worst cards
+		ArrayList<Card> worstCards = new ArrayList<Card>();
+		for (Color color : hand.keySet()) {
+			for (Card card : hand.get(color)) {
+				if (worstCards.isEmpty())
+					worstCards.add(card);
+				else {
+					if (card.getValue() == worstCards.get(0).getValue())
+						worstCards.add(card);
+					else if (card.getValue() < worstCards.get(0).getValue()) {
+						worstCards.removeAll(worstCards);
+						worstCards.add(card);
+					}
+				}
+			}
+		}
+		Collections.shuffle(worstCards);
+		return worstCards.get(0);
+	}
+
 	/**
 	 * Removes the best card from the player's hand (first round)
-	 * @return one of the shuffled best cards 
+	 * 
+	 * @return one of the shuffled best cards
 	 */
 	public Card start() {
 		Card best = findMax();
 		hand.get(best.getColor()).remove(best);
 		return best;
 	}
-	
-	public Card reply() {
-		// TODO
-		return null;
+
+	public Card reply(Card playedCard) {
+		Card card;
+		if (0 != hand.get(playedCard.getColor()).size()) {
+			if (null != (card = hand.get(playedCard.getColor()).higher(playedCard))) {
+				hand.get(card.getColor()).remove(card);
+				return card;
+			} else
+				card = hand.get(playedCard.getColor()).first();
+		} else {
+			card = findMin();
+		}
+		hand.get(card.getColor()).remove(card);
+		return card;
 	}
-	
-	
+
 }
