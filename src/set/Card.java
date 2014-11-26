@@ -9,7 +9,7 @@ import java.util.Map;
  * @author Antoine De Gieter
  *
  */
-public class Card {
+public class Card implements Comparable<Card> {
 	private Name name;
 	private int value;
 	private Color color;
@@ -89,6 +89,19 @@ public class Card {
 			return false;
 		}
 		return true;
+	}
+
+	/**
+	 * @see java.lang.Comparable.compareTo(Object o)
+	 */
+	@Override
+	public int compareTo(Card card) {
+		if (name.ordinal() == card.getName().ordinal())
+			return 0;
+		else if (name.ordinal() < card.getName().ordinal())
+			return -1;
+		else
+			return 1;
 	}
 
 	/**
