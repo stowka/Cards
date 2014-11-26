@@ -6,15 +6,16 @@ import java.util.Map;
 
 /**
  * Card class - represents a single card
+ * 
  * @author Antoine De Gieter
- *
+ * @author Fran&ccedil;ois-Xavier B&eacute;ligat
+ * 
  */
 public class Card implements Comparable<Card> {
 	private Name name;
 	private int value;
 	private Color color;
-	
-	
+
 	/*
 	 * defines the relation between a card name and its value
 	 */
@@ -31,11 +32,14 @@ public class Card implements Comparable<Card> {
 		tmp.put(Name.ACE, 11);
 		nameValue = Collections.unmodifiableMap(tmp);
 	}
-	
+
 	/**
 	 * Card constructor
-	 * @param _name name of the card
-	 * @param _color color of the card
+	 * 
+	 * @param _name
+	 *            name of the card
+	 * @param _color
+	 *            color of the card
 	 */
 	public Card(Name _name, Color _color) {
 		name = _name;
@@ -50,7 +54,7 @@ public class Card implements Comparable<Card> {
 	public String toString() {
 		return name + " of " + color + " [" + value + "]";
 	}
-	
+
 	/**
 	 * @see java.lang.Object.hashCode()
 	 */
@@ -63,7 +67,7 @@ public class Card implements Comparable<Card> {
 		result = prime * result + value;
 		return result;
 	}
-	
+
 	/**
 	 * @see java.lang.Object.equals(Object obj)
 	 */

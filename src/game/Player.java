@@ -9,8 +9,10 @@ import set.Card;
 import set.Color;
 
 /**
+ * Player class -
  * 
  * @author Antoine De Gieter
+ * @author Fran&ccedil;ois-Xavier B&eacute;ligat
  * 
  */
 public class Player {
@@ -147,10 +149,19 @@ public class Player {
 		return best;
 	}
 
+	/**
+	 * Plays according to an AI (other rounds): If has better card in same
+	 * color, plays the straight higher one Else if has card in same color,
+	 * plays the worst one Else plays the worst card whatever the color.
+	 * 
+	 * @param playedCard
+	 * @return
+	 */
 	public Card reply(Card playedCard) {
 		Card card;
 		if (0 != hand.get(playedCard.getColor()).size()) {
-			if (null != (card = hand.get(playedCard.getColor()).higher(playedCard))) {
+			if (null != (card = hand.get(playedCard.getColor()).higher(
+					playedCard))) {
 				hand.get(card.getColor()).remove(card);
 				return card;
 			} else
