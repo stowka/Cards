@@ -75,7 +75,7 @@ public class Game {
 		return null;
 	}
 
-	public static void main(String[] argv) {
+	/*public static void main(String[] argv) {
 		System.out.println("Game started...\n");
 		Deck deck = Deck.getInstance();
 
@@ -143,7 +143,7 @@ public class Game {
 		System.out.println("\t" + p2.getName() + ":\t"
 				+ game.getPlayerTwoScore());
 		System.out.println("Game ended...");
-	}
+	}*/
 
 	/**
 	 * @return the playerOneScore
